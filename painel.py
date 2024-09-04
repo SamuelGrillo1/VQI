@@ -6,7 +6,7 @@ st.title("Verificação de Montagem")
 
 st.write("Selecione a região da máquina para ver a montagem ideal.")
 
-# Lista de regiões com base nas pastas fornecidas
+
 regioes = [
     "Bloco do jib", 
     "Bloco do principal", 
@@ -32,7 +32,7 @@ regiao_selecionada = st.selectbox("Escolha a região da máquina:", regioes)
 
 st.write("**Em breve:** Função para tirar foto e verificar montagem.")
 
-# Caminhos relativos para as pastas de imagens
+
 mapeamento_diretorios = {
     "Bloco do jib": "imagens/Bloco do jib",
     "Bloco do principal": "imagens/Bloco do principal",
@@ -54,13 +54,13 @@ mapeamento_diretorios = {
     "saida superior da esteira do secundario": "imagens/saida superior da esteira do secundario"
 }
 
-# Obtendo o caminho absoluto de forma dinâmica
+
 base_dir = os.path.dirname(os.path.abspath(__file__))
 subdiretorio_path = os.path.join(base_dir, mapeamento_diretorios[regiao_selecionada])
 
-# Verifica se o caminho da pasta existe
+
 if os.path.exists(subdiretorio_path) and os.path.isdir(subdiretorio_path):
-    # Listando arquivos na pasta e pegando o primeiro encontrado
+
     arquivos = os.listdir(subdiretorio_path)
     image_file = None
 
@@ -73,7 +73,7 @@ if os.path.exists(subdiretorio_path) and os.path.isdir(subdiretorio_path):
         image_path = os.path.join(subdiretorio_path, image_file)
         try:
             imagem = Image.open(image_path)
-            # Exibe a imagem com uma largura fixa para mantê-la proporcional
+
             st.image(imagem, caption=f"Montagem ideal para {regiao_selecionada}.", use_column_width=False, width=400)
         except Exception as e:
             st.error(f"Erro ao abrir a imagem: {e}")
